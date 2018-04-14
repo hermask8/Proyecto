@@ -28,11 +28,53 @@ namespace Guaflix.Controllers
         {
             return View();
         }
+        PeliculasController pelis = new PeliculasController();
+        public ActionResult CrearUsuario(FormCollection persona)
+        {
+            try
+            {
+                var model = new Usuarios
+                {
+                    Nombre = persona["Nombre"],
+                    Apellido = persona["Apellido"],
+                    Edad = Convert.ToInt16(persona["Edad"]),
+                    Contraseña = persona["Contraseña"],
+                    ConfirmarContraseña = persona["ConfirmarContraseña"]
+                };
 
-        public ActionResult CrearUsuario()
+                //miArbol.Agregar()
+            }
+            catch
+            {
+
+            }
+            return View();
+        }
+        
+     
+        public ActionResult Catálogo()
         {
             return View();
         }
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(string usuario, string contraseña)
+        {
+            if (usuario == "admin" && contraseña == "admin")
+            {  
+                return RedirectToAction("Catálogo", "guaflix");
+            }
+            else
+            {
+                return View();
+            }
+           
+        }
+      
+
 
     }
 }

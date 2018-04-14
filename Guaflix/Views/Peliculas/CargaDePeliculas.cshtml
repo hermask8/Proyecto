@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "CargaDePeliculas";
+}
+@using Guaflix.Models;
+
+@model IEnumerable<Peliculas>
+
+@using (Html.BeginForm("CargaDePeliculas", "Peliculas", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div>
+        <input type="file" name="archivo" />
+        <input type="submit" value="Importar" />
+    </div>
+}
+
+<h2>CargaDePeliculas</h2>
+

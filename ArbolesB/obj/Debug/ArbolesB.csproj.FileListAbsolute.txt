@@ -4,3 +4,9 @@ C:\Users\Edwin Hilario\Documents\URL\progra\Estructuras\Practica\Proyecto\Guafli
 C:\Users\Edwin Hilario\Documents\URL\progra\Estructuras\Practica\Proyecto\Guaflix\ArbolesB\obj\Debug\ArbolesB.csproj.CoreCompileInputs.cache
 C:\Users\Edwin Hilario\Documents\URL\progra\Estructuras\Practica\Proyecto\Guaflix\ArbolesB\obj\Debug\ArbolesB.dll
 C:\Users\Edwin Hilario\Documents\URL\progra\Estructuras\Practica\Proyecto\Guaflix\ArbolesB\obj\Debug\ArbolesB.pdb
+C:\Users\Ana Gabriel Morales\Desktop\Labs\Proyecto\ArbolesB\bin\Debug\ArbolesB.dll
+C:\Users\Ana Gabriel Morales\Desktop\Labs\Proyecto\ArbolesB\bin\Debug\ArbolesB.pdb
+C:\Users\Ana Gabriel Morales\Desktop\Labs\Proyecto\ArbolesB\obj\Debug\ArbolesB.csprojResolveAssemblyReference.cache
+C:\Users\Ana Gabriel Morales\Desktop\Labs\Proyecto\ArbolesB\obj\Debug\ArbolesB.csproj.CoreCompileInputs.cache
+C:\Users\Ana Gabriel Morales\Desktop\Labs\Proyecto\ArbolesB\obj\Debug\ArbolesB.dll
+C:\Users\Ana Gabriel Morales\Desktop\Labs\Proyecto\ArbolesB\obj\Debug\ArbolesB.pdb

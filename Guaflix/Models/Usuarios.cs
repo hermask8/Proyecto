@@ -7,10 +7,10 @@ namespace Guaflix.Models
 {
     public class Usuarios
     {
-        string Nombre { get; set; }
-        string Apellido { get; set; }
-        int Edad { get; set; }
-        string Contraseña { get; set; }
-        string ConfirmarContraseña { get; set; }
+       public string Nombre { get; set; }
+       public string Apellido { get; set; }
+       public int Edad { get; set; }
+       public string Contraseña { get; set; }
+       public string ConfirmarContraseña { get; set; }
     }
 }

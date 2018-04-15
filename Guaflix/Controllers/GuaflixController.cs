@@ -16,11 +16,11 @@ namespace Guaflix.Controllers
 {
     public class GuaflixController : Controller
     {
-        ArbolesB.ArbolBusqueda<int, Peliculas> miArbol;
+        ArbolesB.ArbolBusqueda<int, Peliculas> miArbol = new ArbolesB.ArbolB<Peliculas>(5, "TreeB", new FabricarTexto());
         // GET: Guaflix
         public ActionResult Index()
         {
-            miArbol = new ArbolesB.ArbolB<Peliculas>(5,"TreeB",new FabricarTexto());
+            miArbol.Cerrar();
             return View();
         }
 
@@ -32,7 +32,9 @@ namespace Guaflix.Controllers
         public ActionResult CrearUsuario(FormCollection persona)
         {
             try
-            {
+            { 
+                //Mientras agrega peliculas para que veas que es lo que hace
+                //Gabriel XD
                 var model = new Usuarios
                 {
                     Nombre = persona["Nombre"],
@@ -48,6 +50,7 @@ namespace Guaflix.Controllers
             {
 
             }
+            miArbol.Cerrar();
             return View();
         }
         

@@ -9,11 +9,11 @@ namespace Guaflix.Models
     public class Peliculas: ArbolesB.ITextoTamañoFijo, IComparable
     {
         private const string TextoEnteroFormato = "%%%%%%%%%%%%%%%%%%%%/%%%%%%%%%%%%%%%%%%%%/00000000000000000000/%%%%%%%%%%%%%%%%%%%%";
-        public string Tipo { get; set; }
         public string Nombre { get; set; }
         public int AñoLanzamiento { get; set; }
+        public string Tipo { get; set; }
         public string Genero { get; set; }
-
+        
         public Peliculas()
         {
             Tipo = "";

@@ -20,6 +20,11 @@ namespace Guaflix.Controllers
             miArbol.Cerrar();
             return View();
         }
+        public ActionResult vistaPeliculas()
+        {
+            miArbol.Cerrar();
+            return View(miArbol);
+        }
         public ActionResult IngresoPeliculaManual()
         {
             miArbol.Cerrar();
@@ -39,7 +44,7 @@ namespace Guaflix.Controllers
                 miArbol.Agregar(modelo.AñoLanzamiento, modelo);
 
             miArbol.Cerrar();
-            return View();
+            return RedirectToAction("vistaPeliculas");
         }
 
         public ActionResult CargaDePeliculas()
@@ -52,7 +57,6 @@ namespace Guaflix.Controllers
         {
             var path = RetornoPelis.File.ReadAllText(archivo.FileName);
             var deserealizar = JsonConvert.DeserializeObject<Peliculas>(path);
-            //miArbol.RecorrerPreOrden();
             miArbol.Agregar(deserealizar.AñoLanzamiento, deserealizar);
             miArbol.Cerrar();
             return View(miArbol);

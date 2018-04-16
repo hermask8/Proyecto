@@ -151,6 +151,7 @@
     <Compile Include="Models\Usuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TamañoFijo\FabricarTexto.cs" />
+    <Compile Include="TamañoFijo\FabricarTextoUsuarios.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -193,6 +194,9 @@
     <Content Include="Views\Guaflix\Login.cshtml" />
     <Content Include="Views\Peliculas\IngresoPeliculaManual.cshtml" />
     <Content Include="Views\Peliculas\CargaDePeliculas.cshtml" />
+    <Content Include="Views\Guaflix\Catálogo.cshtml" />
+    <Content Include="Views\Peliculas\vistaPeliculas.cshtml" />
+    <Content Include="Views\Guaflix\CrearUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

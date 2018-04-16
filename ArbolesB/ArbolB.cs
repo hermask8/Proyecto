@@ -164,6 +164,7 @@ namespace ArbolesB
             _fabrica = fabrica;
 
             // Se abre la conexión al archivo
+            
             _archivo = new FileStream(_archivoNombre, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read);
 
             // Se obtienen los valores del encabezado del archivo

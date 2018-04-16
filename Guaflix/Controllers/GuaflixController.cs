@@ -16,19 +16,20 @@ namespace Guaflix.Controllers
 {
     public class GuaflixController : Controller
     {
-        ArbolesB.ArbolBusqueda<int, Peliculas> miArbol = new ArbolesB.ArbolB<Peliculas>(5, "TreeB", new FabricarTexto());
+        PeliculasController pelis = new PeliculasController();
         // GET: Guaflix
         public ActionResult Index()
         {
-            miArbol.Cerrar();
+            pelis.miArbol.Cerrar();
             return View();
         }
 
         public ActionResult ValidarUsiario()
         {
+            pelis.miArbol.Cerrar();
             return View();
         }
-        PeliculasController pelis = new PeliculasController();
+        
         public ActionResult CrearUsuario(FormCollection persona)
         {
             try
@@ -43,38 +44,43 @@ namespace Guaflix.Controllers
                     Contraseña = persona["Contraseña"],
                     ConfirmarContraseña = persona["ConfirmarContraseña"]
                 };
-
+                pelis.miArbol.Cerrar();
                 //miArbol.Agregar()
             }
             catch
             {
-
+                pelis.miArbol.Cerrar();
             }
-            miArbol.Cerrar();
+            pelis.miArbol.Cerrar();
             return View();
         }
         
      
         public ActionResult Catálogo()
         {
+            pelis.miArbol.Cerrar();
             return View();
         }
         public ActionResult Login()
         {
+            pelis.miArbol.Cerrar();
             return View();
         }
         [HttpPost]
         public ActionResult Login(string usuario, string contraseña)
         {
+
             if (usuario == "admin" && contraseña == "admin")
-            {  
+            {
+                pelis.miArbol.Cerrar();
                 return RedirectToAction("Catálogo", "guaflix");
             }
             else
             {
+                pelis.miArbol.Cerrar();
                 return View();
             }
-           
+            
         }
       
 

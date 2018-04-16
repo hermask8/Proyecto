@@ -12,11 +12,12 @@ namespace Guaflix.Controllers
 {
     public class PeliculasController : Controller
     {
-        ArbolesB.ArbolBusqueda<int, Peliculas> miArbol = new ArbolesB.ArbolB<Peliculas>(5, "TreeB", new FabricarTexto());
+       public ArbolesB.ArbolBusqueda<int, Peliculas> miArbol = new ArbolesB.ArbolB<Peliculas>(5, "TreeB", new FabricarTexto());
         // GET: Peliculas
+        
         public ActionResult Index()
         {
-
+            miArbol.Cerrar();
             return View();
         }
         public ActionResult IngresoPeliculaManual()
@@ -43,6 +44,7 @@ namespace Guaflix.Controllers
 
         public ActionResult CargaDePeliculas()
         {
+            miArbol.Cerrar();
             return View();
         }
         [HttpPost]
@@ -52,17 +54,21 @@ namespace Guaflix.Controllers
             var deserealizar = JsonConvert.DeserializeObject<Peliculas>(path);
             //miArbol.RecorrerPreOrden();
             miArbol.Agregar(deserealizar.AñoLanzamiento, deserealizar);
+            miArbol.Cerrar();
             return View(miArbol);
         }
 
         public ActionResult ListadoPeliculas()
         {
+            miArbol.Cerrar();
             return View();
         }
 
         public ActionResult EliminarPelicula()
         {
+            miArbol.Cerrar();
             return View();
         }
+        
     }
 }

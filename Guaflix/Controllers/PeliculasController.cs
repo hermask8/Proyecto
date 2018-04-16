@@ -6,12 +6,13 @@ using System.Web.Mvc;
 using Guaflix.Models;
 using RetornoPelis = System.IO;
 using Newtonsoft.Json;
+using Guaflix.TamañoFijo;
 
 namespace Guaflix.Controllers
 {
     public class PeliculasController : Controller
     {
-        ArbolesB.ArbolBusqueda<int, Peliculas> miArbol;
+        ArbolesB.ArbolBusqueda<int, Peliculas> miArbol = new ArbolesB.ArbolB<Peliculas>(5, "TreeB", new FabricarTexto());
         // GET: Peliculas
         public ActionResult Index()
         {
@@ -20,13 +21,12 @@ namespace Guaflix.Controllers
         }
         public ActionResult IngresoPeliculaManual()
         {
+            miArbol.Cerrar();
             return View();
         }
         [HttpPost]
         public ActionResult IngresoPeliculaManual(FormCollection pelicula)
         {
-            try
-            {
                 var modelo = new Peliculas
                 {
                     Tipo = pelicula["Tipo"],
@@ -36,11 +36,8 @@ namespace Guaflix.Controllers
                 };
 
                 miArbol.Agregar(modelo.AñoLanzamiento, modelo);
-            }
-            catch
-            {
-                
-            }
+
+            miArbol.Cerrar();
             return View();
         }
 

@@ -16,23 +16,26 @@ namespace Guaflix.Controllers
 {
     public class GuaflixController : Controller
     {
-        public ArbolesB.ArbolBusqueda<int, Usuarios> miArbol = new ArbolesB.ArbolB<Usuarios>(5, "ArbolB", new FabricarTextoUsuarios());
+        public ArbolesB.ArbolBusqueda<int, Usuarios> miArbol2 = new ArbolesB.ArbolB<Usuarios>(5, "ArbolB", new FabricarTextoUsuarios());
+
         PeliculasController pelis = new PeliculasController();
         // GET: Guaflix
         public ActionResult Index()
         {
-            pelis.miArbol.Cerrar();
+            miArbol2.Cerrar();
+            pelis.peliculasTree2.Cerrar();
             return View();
         }
 
         public ActionResult ValidarUsuario()
         {
-            pelis.miArbol.Cerrar();
+            miArbol2.Cerrar();
+            pelis.peliculasTree2.Cerrar();
             return View();
         }
         public ActionResult CrearUsuario()
         {
-            miArbol.Cerrar();
+            miArbol2.Cerrar();
             return View();
         }
         [HttpPost]
@@ -50,26 +53,30 @@ namespace Guaflix.Controllers
                     Contraseña = persona["Contraseña"],
                     ConfirmarContraseña = persona["ConfirmarContraseña"]
                 };
-                pelis.miArbol.Cerrar();
-                miArbol.Agregar(model.Edad, model);
+                pelis.peliculasTree2.Cerrar();
+                miArbol2.Agregar(model.Edad, model);
             }
             catch
             {
-                pelis.miArbol.Cerrar();
+                miArbol2.Cerrar();
+                pelis.peliculasTree2.Cerrar();
             }
-            pelis.miArbol.Cerrar();
+            miArbol2.Cerrar();
+            pelis.peliculasTree2.Cerrar();
             return View();
         }
         
      
         public ActionResult Catálogo()
         {
-            pelis.miArbol.Cerrar();
+            miArbol2.Cerrar();
+            pelis.peliculasTree2.Cerrar();
             return View();
         }
         public ActionResult Login()
         {
-            pelis.miArbol.Cerrar();
+            miArbol2.Cerrar();
+            pelis.peliculasTree2.Cerrar();
             return View();
         }
         [HttpPost]
@@ -77,12 +84,14 @@ namespace Guaflix.Controllers
         {
             if (usuario == "admin" && contraseña == "admin")
             {
-                pelis.miArbol.Cerrar();
+                miArbol2.Cerrar();
+                pelis.peliculasTree2.Cerrar();
                 return RedirectToAction("Catálogo", "guaflix");
             }
             else
             {
-                pelis.miArbol.Cerrar();
+                miArbol2.Cerrar();
+                pelis.peliculasTree2.Cerrar();
                 return View();
             }
         }

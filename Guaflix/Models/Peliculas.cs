@@ -34,7 +34,7 @@ namespace Guaflix.Models
         {
             get
             {
-                return 80;
+                return 83;
             }
         }
 

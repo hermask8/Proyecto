@@ -12,22 +12,30 @@ namespace Guaflix.Controllers
 {
     public class PeliculasController : Controller
     {
-       public ArbolesB.ArbolBusqueda<int, Peliculas> miArbol = new ArbolesB.ArbolB<Peliculas>(5, "TreeB", new FabricarTexto());
+        //public ArbolesB.ArbolBusqueda<int, Peliculas> seriesTree = new ArbolesB.ArbolB<Peliculas>(5, "name.showtree", new FabricarTexto());
+        //public ArbolesB.ArbolBusqueda<int, Peliculas> seriesTree2 = new ArbolesB.ArbolB<Peliculas>(5, "year.showtree", new FabricarTexto());
+        //public ArbolesB.ArbolBusqueda<int, Peliculas> seriesTree3 = new ArbolesB.ArbolB<Peliculas>(5, "gender.showtree", new FabricarTexto());
+        //public ArbolesB.ArbolBusqueda<int, Peliculas> peliculasTree = new ArbolesB.ArbolB<Peliculas>(5, "name.movietree", new FabricarTexto());
+        public ArbolesB.ArbolBusqueda<int, Peliculas> peliculasTree2 = new ArbolesB.ArbolB<Peliculas>(5, "year.movietree", new FabricarTexto());
+        //public ArbolesB.ArbolBusqueda<int, Peliculas> peliculasTree3 = new ArbolesB.ArbolB<Peliculas>(5, "gender.movietree", new FabricarTexto());
+        //public ArbolesB.ArbolBusqueda<int, Peliculas> documentalTree = new ArbolesB.ArbolB<Peliculas>(5, "name.documentarytree", new FabricarTexto());
+        //public ArbolesB.ArbolBusqueda<int, Peliculas> documental2 = new ArbolesB.ArbolB<Peliculas>(5, "year.documentarytree", new FabricarTexto());
+        //public ArbolesB.ArbolBusqueda<int, Peliculas> documental3 = new ArbolesB.ArbolB<Peliculas>(5, "gender.documentarytree", new FabricarTexto());
         // GET: Peliculas
-        
+
         public ActionResult Index()
         {
-            miArbol.Cerrar();
+            peliculasTree2.Cerrar();
             return View();
         }
         public ActionResult vistaPeliculas()
         {
-            miArbol.Cerrar();
-            return View(miArbol);
+            peliculasTree2.Cerrar();
+            return View();
         }
         public ActionResult IngresoPeliculaManual()
         {
-            miArbol.Cerrar();
+            peliculasTree2.Cerrar();
             return View();
         }
         [HttpPost]
@@ -41,15 +49,15 @@ namespace Guaflix.Controllers
                     AñoLanzamiento =Convert.ToInt16(pelicula["AñoLanzamiento"])
                 };
 
-                miArbol.Agregar(modelo.AñoLanzamiento, modelo);
+                peliculasTree2.Agregar(modelo.AñoLanzamiento, modelo);
 
-            miArbol.Cerrar();
+            peliculasTree2.Cerrar();
             return RedirectToAction("vistaPeliculas");
         }
 
         public ActionResult CargaDePeliculas()
         {
-            miArbol.Cerrar();
+            peliculasTree2.Cerrar();
             return View();
         }
         [HttpPost]
@@ -57,20 +65,20 @@ namespace Guaflix.Controllers
         {
             var path = RetornoPelis.File.ReadAllText(archivo.FileName);
             var deserealizar = JsonConvert.DeserializeObject<Peliculas>(path);
-            miArbol.Agregar(deserealizar.AñoLanzamiento, deserealizar);
-            miArbol.Cerrar();
-            return View(miArbol);
+            peliculasTree2.Agregar(deserealizar.AñoLanzamiento, deserealizar);
+            peliculasTree2.Cerrar();
+            return View();
         }
 
         public ActionResult ListadoPeliculas()
         {
-            miArbol.Cerrar();
+            peliculasTree2.Cerrar();
             return View();
         }
 
         public ActionResult EliminarPelicula()
         {
-            miArbol.Cerrar();
+            peliculasTree2.Cerrar();
             return View();
         }
         

@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "CargarUsuarios";
+}
+@using (Html.BeginForm("CargarUsuarios", "Guaflix", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div>
+        <input type="file" name="archivo" />
+        <input type="submit" value="Importar" />
+    </div>
+}
+<h2>CargarUsuarios</h2>
+

@@ -1,0 +1,20 @@
+{
+  {
+	"Nombre": "An Inconvenient Truth",
+	"AñoLanzamiento": 2006,
+	"Tipo": "Documental",
+	"Genero": "Medio Ambiente"
+  },
+   {
+  "Nombre":"Avengers: Infinity War",
+	"AñoLanzamiento": 2018,
+	"Tipo": "Pelicula",
+	"Genero": "Accion"
+  },
+ {
+	"Nombre": "How I meet your Mother",
+	"AñoLanzamiento": 2005,
+	"Tipo": "Show",
+  "Genero": "Sitcom"
+  }
+}

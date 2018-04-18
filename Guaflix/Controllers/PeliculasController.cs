@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Guaflix.Models;
-using RetornoPelis = System.IO;
+using System.IO;
 using Newtonsoft.Json;
 using Guaflix.TamañoFijo;
 
@@ -39,7 +39,7 @@ namespace Guaflix.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult IngresoPeliculaManual(FormCollection pelicula)
+       public ActionResult IngresoPeliculaManual(FormCollection pelicula)
         {
                 var modelo = new Peliculas
                 {
@@ -52,7 +52,7 @@ namespace Guaflix.Controllers
                 peliculasTree2.Agregar(modelo.AñoLanzamiento, modelo);
 
             peliculasTree2.Cerrar();
-            return RedirectToAction("vistaPeliculas");
+            return View();
         }
 
         public ActionResult CargaDePeliculas()
@@ -63,10 +63,25 @@ namespace Guaflix.Controllers
         [HttpPost]
         public ActionResult CargaDePeliculas(HttpPostedFileBase archivo)
         {
-            var path = RetornoPelis.File.ReadAllText(archivo.FileName);
-            var deserealizar = JsonConvert.DeserializeObject<Peliculas>(path);
-            peliculasTree2.Agregar(deserealizar.AñoLanzamiento, deserealizar);
-            peliculasTree2.Cerrar();
+            string pathArchivo = string.Empty;
+            if (archivo != null)
+            {
+                archivo.SaveAs(Server.MapPath("~/JSONFiles" + Path.GetFileName(archivo.FileName)));
+                StreamReader sr = new StreamReader(Server.MapPath("~/JSONFiles" + Path.GetFileName(archivo.FileName)));
+                var informacion = sr.ReadToEnd();
+                string[] g;
+                char[] separador = { '{', '}' };
+                g = informacion.Split(separador, StringSplitOptions.RemoveEmptyEntries);
+                for (int i = 1; i < g.Length; i += 1)
+                {
+                    string a = "{" + g[i] + "}";
+                    var info = JsonConvert.DeserializeObject<Peliculas>(a);
+                    peliculasTree2.Agregar(info.AñoLanzamiento, info);
+                    i++;
+                }
+                peliculasTree2.Cerrar();
+               
+            }
             return View();
         }
 

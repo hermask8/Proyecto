@@ -195,8 +195,8 @@
     <Content Include="Views\Peliculas\IngresoPeliculaManual.cshtml" />
     <Content Include="Views\Peliculas\CargaDePeliculas.cshtml" />
     <Content Include="Views\Guaflix\Catálogo.cshtml" />
-    <Content Include="Views\Peliculas\vistaPeliculas.cshtml" />
     <Content Include="Views\Guaflix\CrearUsuario.cshtml" />
+    <Content Include="Views\Guaflix\CargarUsuarios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

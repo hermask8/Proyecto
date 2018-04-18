@@ -8,7 +8,7 @@ namespace Guaflix.Models
 {
     public class Usuarios : ArbolesB.ITextoTamañoFijo, IComparable
     {
-        private const string TextoEnteroFormato = "$$$$$$$$$$/$$$$$$$$$$$$$$$/000/$$$$$$$$$$$$$$$$$$$$/$$$$$$$$$$$$$$$$$$$$";
+       private const string TextoEnteroFormato = "$$$$$$$$$$/$$$$$$$$$$$$$$$/000/$$$$$$$$$$$$$$$$$$$$/$$$$$$$$$$$$$$$$$$$$";
        public string Nombre { get; set; }
        public string Apellido { get; set; }
        public int Edad { get; set; }

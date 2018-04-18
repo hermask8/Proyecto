@@ -1,0 +1,24 @@
+{
+  {
+    "Nombre": "Mariana",
+    "Apellido": "Hidalgo",
+    "Edad": "19",
+    "Contraseña": "mariana123",
+    "ConfirmarContraseña": "mariana123"
+  },
+  {
+    "Nombre": "Maria",
+    "Apellido": "Morales",
+    "Edad": "20",
+    "Contraseña": "maria123",
+    "ConfirmarContraseña": "maria123"
+  },
+  {
+    "Nombre": "Carlos",
+    "Apellido": "Morales",
+    "Edad": "18",
+    "Contraseña": "carlos123",
+    "ConfirmarContraseña": "carlos123"
+  }
+}
+

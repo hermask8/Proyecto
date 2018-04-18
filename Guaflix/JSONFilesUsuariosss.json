@@ -1,0 +1,12 @@
+[
+    {   "Nombre": "Juan",
+        "Apellido": "Pérez",
+        "Edad": 20,
+        "Contraseña": "jperez",
+        "ConfirmarContraseña": "jperez123"},
+    {  "Nombre": "María",
+        "Apellido": "López",
+        "Edad": 19,
+        "Contraseña": "mlopez",
+        "ConfirmarContraseña": "mlopez987"}
+]

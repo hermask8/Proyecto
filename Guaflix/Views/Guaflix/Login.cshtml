@@ -9,21 +9,24 @@
 
     @using (Html.BeginForm("Login", "Guaflix", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        <div>
-            <div class="form-horizontal">
-                <input type="text" name="usuario" />
-                <input type="password" name="contraseña" />
-                <input type="submit" value="Login" />
-            </div>
-            <div>
-                @Html.ActionLink("Resgistrarse", "CrearUsuario", "Guaflix", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-
-            <div>
-                @Html.ActionLink("Ir a Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-
-
+    <div>
+        <div class="form-horizontal">
+            <input type="text" name="usuario" />
+            <input type="password" name="contraseña" />
+            <input type="submit" value="Login" />
         </div>
+        <div>
+            @Html.ActionLink("Resgistrarse", "CrearUsuario", "Guaflix", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div>
+            @Html.ActionLink("Cargar Usuarios", "CargarUsuarios", "Guaflix", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+
+        <div>
+            @Html.ActionLink("Ir a Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+
+
+    </div>
     }
 </body>

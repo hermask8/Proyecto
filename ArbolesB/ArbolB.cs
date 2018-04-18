@@ -221,7 +221,7 @@ namespace ArbolesB
         #endregion
         public override void Agregar(int llave, T dato)
         {
-            if (llave == Utilidades.ApuntadorVacio)
+            if (llave== Utilidades.ApuntadorVacio)
             {
                 throw new ArgumentOutOfRangeException("llave");
             }
@@ -229,7 +229,7 @@ namespace ArbolesB
             AgregarRecursivo(_raiz, llave, dato);
             Tamaño++;
         }
-
+        
 
         public override bool Contiene(int llave)
         {

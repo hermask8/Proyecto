@@ -25,6 +25,7 @@ namespace Guaflix.Controllers
 
         public ActionResult Index()
         {
+            
             peliculasTree2.Cerrar();
             return View();
         }

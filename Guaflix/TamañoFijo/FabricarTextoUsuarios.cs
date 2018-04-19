@@ -11,13 +11,13 @@ namespace Guaflix.TamañoFijo
         public Usuarios Fabricar(string textoTamañoFijo)
         {
             Usuarios miUsuario = new Usuarios();
-            var datos = textoTamañoFijo.Split('/');
-
-            miUsuario.Nombre = datos[0].PadLeft(10, '$');
-            miUsuario.Apellido = datos[1].PadLeft(15, '$');
-            miUsuario.Edad = int.Parse(datos[2].PadLeft(3, '0'));
-            miUsuario.Contraseña = datos[3].PadLeft(20, '$');
-            miUsuario.ConfirmarContraseña = datos[4].PadLeft(20, '$');
+            var datos = textoTamañoFijo.Split('=');
+            miUsuario.username = datos[0].PadLeft(20, '%');
+            miUsuario.nombre = datos[1].PadLeft(20, '%');
+            miUsuario.apellido = datos[2].PadLeft(15, '%');
+            miUsuario.edad = datos[3].PadLeft(3, '%');
+            miUsuario.password = datos[4].PadLeft(20, '%');
+            miUsuario.confirmapassword = datos[5].PadLeft(20, '%');
             return miUsuario;
         }
 

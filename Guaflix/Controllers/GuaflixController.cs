@@ -15,34 +15,34 @@ using Newtonsoft.Json;
 using System.IO;
 using pathArchivo2 = System.IO;
 using System.Web.Script.Serialization;
-
-
+using ArbolesB;
 
 namespace Guaflix.Controllers
 {
     public class GuaflixController : Controller
     {
-        public ArbolesB.ArbolBusqueda<int, Usuarios> miArbol2 = new ArbolesB.ArbolB<Usuarios>(5, "ArbolBUsuarios", new FabricarTextoUsuarios());
-
         PeliculasController pelis = new PeliculasController();
+        //public static List<Peliculas2> PeliculaLista = new List<Peliculas2>();
+        
+        public ArbolB<Usuarios> UsersTree = new ArbolB<Usuarios>(3, "users.tree", new FabricarTextoUsuarios());
         // GET: Guaflix
         public ActionResult Index()
         {
-            miArbol2.Cerrar();
+            UsersTree.Cerrar();
             pelis.peliculasTree2.Cerrar();
             return View();
         }
 
         public ActionResult ValidarUsuario()
         {
-            miArbol2.Cerrar();
+            UsersTree.Cerrar();
             pelis.peliculasTree2.Cerrar();
             return View();
         }
 
         public ActionResult CargarUsuarios()
         {
-            miArbol2.Cerrar();
+            UsersTree.Cerrar();
             pelis.peliculasTree2.Cerrar();
             return View();
         }
@@ -62,17 +62,18 @@ namespace Guaflix.Controllers
                 {
                     string a = "{" + g[i] + "}";
                     var info = JsonConvert.DeserializeObject<Usuarios>(a);
-                    miArbol2.Agregar(info.Edad, info);
+                    UsersTree.Agregar(info.nombre, info);
                     i++;
                 }
-                miArbol2.Cerrar();
+                UsersTree.Cerrar();
                 pelis.peliculasTree2.Cerrar();
             }
+            UsersTree.Cerrar();
             return View();
         }
         public ActionResult CrearUsuario()
         {
-            miArbol2.Cerrar();
+            UsersTree.Cerrar();
             pelis.peliculasTree2.Cerrar();
             return View();
         }
@@ -83,22 +84,24 @@ namespace Guaflix.Controllers
             { 
                 var model = new Usuarios
                 {
-                    Nombre = persona["Nombre"],
-                    Apellido = persona["Apellido"],
-                    Edad = Convert.ToInt16(persona["Edad"]),
-                    Contraseña = persona["Contraseña"],
-                    ConfirmarContraseña = persona["ConfirmarContraseña"]
+                    username = persona["username"],
+                    nombre = persona["nombre"],
+                    apellido = persona["apellido"],
+                    edad = persona["edad"],
+                    password = persona["password"],
+                    confirmapassword = persona["confirmpassword"]
                 };
-                miArbol2.Cerrar();
+                
                 pelis.peliculasTree2.Cerrar();
-                miArbol2.Agregar(model.Edad, model);
+                UsersTree.Agregar(model.nombre, model);
+                UsersTree.Cerrar();
             }
             catch
             {
-                miArbol2.Cerrar();
+                UsersTree.Cerrar();
                 pelis.peliculasTree2.Cerrar();
             }
-            miArbol2.Cerrar();
+            UsersTree.Cerrar();
             pelis.peliculasTree2.Cerrar();
             return View();
         }
@@ -106,13 +109,13 @@ namespace Guaflix.Controllers
      
         public ActionResult Catálogo()
         {
-            miArbol2.Cerrar();
+            UsersTree.Cerrar();
             pelis.peliculasTree2.Cerrar();
             return View();
         }
         public ActionResult Login()
         {
-            miArbol2.Cerrar();
+            UsersTree.Cerrar();
             pelis.peliculasTree2.Cerrar();
             return View();
         }
@@ -122,14 +125,14 @@ namespace Guaflix.Controllers
             
             if (usuario == "admin" && contraseña == "admin")
             {
-                miArbol2.Cerrar();
+                UsersTree.Cerrar();
                 pelis.peliculasTree2.Cerrar();
                 return RedirectToAction("Catálogo", "guaflix");
             }
             
             else
             {
-                miArbol2.Cerrar();
+                UsersTree.Cerrar();
                 pelis.peliculasTree2.Cerrar();
                 return View();
             }

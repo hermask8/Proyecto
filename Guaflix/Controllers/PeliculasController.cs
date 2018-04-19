@@ -16,7 +16,7 @@ namespace Guaflix.Controllers
         //public ArbolesB.ArbolBusqueda<int, Peliculas> seriesTree2 = new ArbolesB.ArbolB<Peliculas>(5, "year.showtree", new FabricarTexto());
         //public ArbolesB.ArbolBusqueda<int, Peliculas> seriesTree3 = new ArbolesB.ArbolB<Peliculas>(5, "gender.showtree", new FabricarTexto());
         //public ArbolesB.ArbolBusqueda<int, Peliculas> peliculasTree = new ArbolesB.ArbolB<Peliculas>(5, "name.movietree", new FabricarTexto());
-        public ArbolesB.ArbolBusqueda<int, Peliculas> peliculasTree2 = new ArbolesB.ArbolB<Peliculas>(5, "year.movietree", new FabricarTexto());
+        public ArbolesB.ArbolBusqueda<string, Peliculas> peliculasTree2 = new ArbolesB.ArbolB<Peliculas>(5, "year.movietree", new FabricarTexto());
         //public ArbolesB.ArbolBusqueda<int, Peliculas> peliculasTree3 = new ArbolesB.ArbolB<Peliculas>(5, "gender.movietree", new FabricarTexto());
         //public ArbolesB.ArbolBusqueda<int, Peliculas> documentalTree = new ArbolesB.ArbolB<Peliculas>(5, "name.documentarytree", new FabricarTexto());
         //public ArbolesB.ArbolBusqueda<int, Peliculas> documental2 = new ArbolesB.ArbolB<Peliculas>(5, "year.documentarytree", new FabricarTexto());
@@ -46,7 +46,7 @@ namespace Guaflix.Controllers
                     Tipo = pelicula["Tipo"],
                     Nombre = pelicula["Nombre"],
                     Genero = pelicula["Genero"],
-                    AñoLanzamiento =Convert.ToInt16(pelicula["AñoLanzamiento"])
+                    AñoLanzamiento =pelicula["AñoLanzamiento"]
                 };
 
                 peliculasTree2.Agregar(modelo.AñoLanzamiento, modelo);

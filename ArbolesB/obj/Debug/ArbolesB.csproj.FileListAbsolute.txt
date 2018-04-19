@@ -28,3 +28,9 @@ C:\Users\Edwin Hilario\Desktop\Proyecto\ArbolesB\obj\Debug\ArbolesB.csprojResolv
 C:\Users\Edwin Hilario\Desktop\Proyecto\ArbolesB\obj\Debug\ArbolesB.csproj.CoreCompileInputs.cache
 C:\Users\Edwin Hilario\Desktop\Proyecto\ArbolesB\obj\Debug\ArbolesB.dll
 C:\Users\Edwin Hilario\Desktop\Proyecto\ArbolesB\obj\Debug\ArbolesB.pdb
+C:\Users\Edwin Hilario\Desktop\ProyectoTerminado\Proyecto\ArbolesB\bin\Debug\ArbolesB.dll
+C:\Users\Edwin Hilario\Desktop\ProyectoTerminado\Proyecto\ArbolesB\bin\Debug\ArbolesB.pdb
+C:\Users\Edwin Hilario\Desktop\ProyectoTerminado\Proyecto\ArbolesB\obj\Debug\ArbolesB.csprojResolveAssemblyReference.cache
+C:\Users\Edwin Hilario\Desktop\ProyectoTerminado\Proyecto\ArbolesB\obj\Debug\ArbolesB.csproj.CoreCompileInputs.cache
+C:\Users\Edwin Hilario\Desktop\ProyectoTerminado\Proyecto\ArbolesB\obj\Debug\ArbolesB.dll
+C:\Users\Edwin Hilario\Desktop\ProyectoTerminado\Proyecto\ArbolesB\obj\Debug\ArbolesB.pdb

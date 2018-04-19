@@ -9,7 +9,7 @@ using System.Web;
 
 namespace ArbolesB
 {
-    public class ArbolB<T> : ArbolBusqueda<int, T> where T : ITextoTamañoFijo
+    public class ArbolB<T> : ArbolBusqueda<string, T> where T : ITextoTamañoFijo
     {
 
         #region Atributos 
@@ -28,7 +28,14 @@ namespace ArbolesB
 
         // El grado del árbol, este es asignado en el momento de la creación        
         // del árbol y no puede cambiarse posteriormente   
+        public int Orden
+        { get; private set; }
 
+        public int Altura
+        {
+            get;
+            private set;
+        }
         private void GuardarEncabezado()
         {
             // Se escribe a disco 
@@ -38,10 +45,10 @@ namespace ArbolesB
             Utilidades.EscribirEntero(_archivo, 3, Orden);
             Utilidades.EscribirEntero(_archivo, 4, Altura);
             _archivo.Flush();
-           
+
         }
 
-        private void AgregarRecursivo(int posicionNodoActual, int llave, T dato)
+        private void AgregarRecursivo(int posicionNodoActual, string llave, T dato)
         {
             NodoB<T> nodoActual = NodoB<T>.LeerNodoDesdeDisco(_archivo, _tamañoEncabezadoBinario, Orden, posicionNodoActual, _fabrica);
 
@@ -62,7 +69,7 @@ namespace ArbolesB
             }
         }
 
-        private void Subir(NodoB<T> nodoActual, int llave, T dato, int hijoDerecho)
+        private void Subir(NodoB<T> nodoActual, string llave, T dato, int hijoDerecho)
         {
             // Si el nodo no está lleno, se agrega la información    
             // al nodo y el método termina   
@@ -78,11 +85,11 @@ namespace ArbolesB
             _ultimaPosicionLibre++;
 
             // Datos a subir al padre luego de la separación  
-            int llavePorSubir = Utilidades.ApuntadorVacio;
-            T datoPorSubir = _fabrica.FabricarNulo(); 
+            string llavePorSubir = "%%%%%%%%%%%%%%%%%%%%";
+            T datoPorSubir = _fabrica.FabricarNulo();
 
             // Se llama al método que hace la separación 
-            nodoActual.SepararNodo(llave, dato, hijoDerecho, nuevoHermano, ref llavePorSubir, datoPorSubir);
+            nodoActual.SepararNodo(llave, dato, hijoDerecho, nuevoHermano, ref llavePorSubir, ref datoPorSubir);
 
             // Actualizar el apuntador en todos los hijos          
             NodoB<T> nodoHijo = null;
@@ -123,7 +130,7 @@ namespace ArbolesB
                 nodoActual.GuardarNodoEnDisco(_archivo, _tamañoEncabezadoBinario);
                 nuevoHermano.GuardarNodoEnDisco(_archivo, _tamañoEncabezadoBinario);
             }
-            else 
+            else
             // No es la raiz        
             {
                 nodoActual.GuardarNodoEnDisco(_archivo, _tamañoEncabezadoBinario);
@@ -134,7 +141,7 @@ namespace ArbolesB
             }
         }
 
-        private NodoB<T> ObtenerRecursivo(int posicionNodoActual, int llave, out int posicion)
+        private NodoB<T> ObtenerRecursivo(int posicionNodoActual, string llave, out int posicion)
         {
             NodoB<T> nodoActual = NodoB<T>.LeerNodoDesdeDisco(_archivo, _tamañoEncabezadoBinario, Orden, posicionNodoActual, _fabrica);
             posicion = nodoActual.PosicionExactaEnNodo(llave);
@@ -164,7 +171,7 @@ namespace ArbolesB
             _fabrica = fabrica;
 
             // Se abre la conexión al archivo
-            
+
             _archivo = new FileStream(_archivoNombre, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read);
 
             // Se obtienen los valores del encabezado del archivo
@@ -178,7 +185,7 @@ namespace ArbolesB
             if (_ultimaPosicionLibre == Utilidades.ApuntadorVacio)
             {
                 _ultimaPosicionLibre = 0;
-            } 
+            }
 
             if (Tamaño == Utilidades.ApuntadorVacio)
             {
@@ -209,19 +216,11 @@ namespace ArbolesB
             // se crea y luego se almacenan los valores iniciales   
             GuardarEncabezado();
         }
-        public int Orden
-        {
-            get; private set;
-        }
-        public int Altura
-        {
-            get;
-            private set;
-        } 
+
         #endregion
-        public override void Agregar(int llave, T dato)
+        public override void Agregar(string llave, T dato)
         {
-            if (llave== Utilidades.ApuntadorVacio)
+            if (llave == "%%%%%%%%%%%%%%%%%%%%")
             {
                 throw new ArgumentOutOfRangeException("llave");
             }
@@ -229,9 +228,9 @@ namespace ArbolesB
             AgregarRecursivo(_raiz, llave, dato);
             Tamaño++;
         }
-        
 
-        public override bool Contiene(int llave)
+
+        public override bool Contiene(string llave)
         {
             int posicion = -1;
             NodoB<T> nodoObtenido = ObtenerRecursivo(_raiz, llave, out posicion);
@@ -246,12 +245,12 @@ namespace ArbolesB
             }
         }
 
-        public override void Eliminar(int llave)
+        public override void Eliminar(string llave)
         {
             throw new NotImplementedException();
         }
 
-        public override T Obtener(int llave)
+        public override T Obtener(string llave)
         {
             int posicion = -1;
             NodoB<T> nodoObtenido = ObtenerRecursivo(_raiz, llave, out posicion);
@@ -270,7 +269,7 @@ namespace ArbolesB
         {
             for (int i = 0; i < nodoActual.Llaves.Count; i++)
             {
-                if (nodoActual.Llaves[i] != Utilidades.ApuntadorVacio)
+                if (nodoActual.Llaves[i] != "")
                 {
                     texto.AppendLine(nodoActual.Llaves[i].ToString());
                     texto.AppendLine(nodoActual.Datos[i].ToString());
@@ -298,9 +297,10 @@ namespace ArbolesB
                 RecorrerPreOrdenRecursivo(nodoActual.Hijos[i], texto);
             }
         }
-
+        public static List<string> miListado = new List<string>();
         private void RecorrerInOrdenRecursivo(int posicionActual, StringBuilder texto)
         {
+
             if (posicionActual == Utilidades.ApuntadorVacio)
             {
                 return;
@@ -312,8 +312,9 @@ namespace ArbolesB
             {
                 RecorrerInOrdenRecursivo(nodoActual.Hijos[i], texto);
 
-                if ((i < nodoActual.Llaves.Count) && (nodoActual.Llaves[i] != Utilidades.ApuntadorVacio))
+                if ((i < nodoActual.Llaves.Count) && (nodoActual.Llaves[i] != "%%%%%%%%%%%%%%%%%%%%"))
                 {
+                    miListado.Add(nodoActual.Datos[i].ToString());
                     texto.AppendLine(nodoActual.Llaves[i].ToString());
                     texto.AppendLine(nodoActual.Datos[i].ToString());
                     texto.AppendLine("---------------");
@@ -368,6 +369,13 @@ namespace ArbolesB
         public override void Cerrar()
         {
             _archivo.Close();
+        }
+
+        public List<string> miLIstado()
+        {
+            miListado.Clear();
+            RecorrerInOrden();
+            return miListado;
         }
     }
 }

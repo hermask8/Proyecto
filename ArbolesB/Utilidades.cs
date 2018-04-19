@@ -10,10 +10,12 @@ namespace ArbolesB
     internal static class Utilidades
     {
 
+
         #region Utilidades Texto
 
         // Para formatear los enteros en los archivos
         internal const int TextoEnteroTamaño = 11;
+        internal const int TextoEnteroLlave = 20;
         private const string TextoEnteroFormato = "00000000000;-0000000000";
 
         // El salto de lina "enter"
@@ -28,7 +30,10 @@ namespace ArbolesB
         {
             return numero.ToString(TextoEnteroFormato);
         }
-
+        internal static string FormatearLlave(string llave)
+        {
+            return llave.PadLeft(20, '%');
+        }
         #endregion
 
 

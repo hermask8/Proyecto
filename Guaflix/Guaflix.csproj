@@ -202,6 +202,8 @@
     <Content Include="Views\Peliculas\ListadoPeliculas.cshtml" />
     <Content Include="Views\Guaflix\Error.cshtml" />
     <Content Include="Views\Peliculas\Busqueda.cshtml" />
+    <Content Include="Views\Guaflix\CatalogoUsuario.cshtml" />
+    <Content Include="Views\Peliculas\listaEncontrados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

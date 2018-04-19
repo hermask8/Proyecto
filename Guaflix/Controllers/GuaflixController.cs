@@ -22,31 +22,9 @@ namespace Guaflix.Controllers
     public class GuaflixController : Controller
     {
         PeliculasController pelis = new PeliculasController();
-        public static List<Usuarios2> PeliculaLista = new List<Usuarios2>();
-        
+        public static List<Usuarios2> usuariosLista2 = new List<Usuarios2>();
         public ArbolB<Usuarios> UsersTree = new ArbolB<Usuarios>(3, "users.tree", new FabricarTextoUsuarios());
         // GET: Guaflix
-        public void Obtener()
-        {
-            List<string> miListado2 = new List<string>();
-            miListado2 = UsersTree.miLIstado();
-            foreach (var item in miListado2)
-            {
-                var valores = item.Split('=');
-                var modelo2 = new Usuarios2
-                {
-                    username = valores[0].Trim('%'),
-                    nombre = valores[1].Trim('%'),
-                    apellido = valores[2].Trim('%'),
-                    edad = valores[3].Trim('%'),
-                    password = valores[4].Trim('%'),
-                    confirmapassword = valores[5].Trim('%'),
-                };
-                PeliculaLista.Add(modelo2);
-            }
-
-            pelis.cerrarArchivos();
-        }
 
         public ActionResult Index()
         {
@@ -125,7 +103,7 @@ namespace Guaflix.Controllers
                 };
                 
                 
-                UsersTree.Agregar(model.nombre, model);
+                UsersTree.Agregar(model.username, model);
                 UsersTree.Cerrar();
                 pelis.cerrarArchivos();
             }
@@ -155,39 +133,16 @@ namespace Guaflix.Controllers
         [HttpPost]
         public ActionResult Login(string usuario, string contraseña)
         {
-            foreach (var i in usuariosLista2)
-            {
-                if (usuario == i.username && contraseña == i.password)
-                {
-                    UsersTree.Cerrar();
-                    pelis.peliculasTree2.Cerrar();
-                    return RedirectToAction("Catálogo", "guaflix");
-                }
-            }
-            if (usuario == "admin" && contraseña == "admin")
-            {
-                UsersTree.Cerrar();
-                pelis.cerrarArchivos();
-                return RedirectToAction("Catálogo", "guaflix");
-            }
-            
-            else
-            {
-                UsersTree.Cerrar();
-                pelis.cerrarArchivos();
-                return RedirectToAction("Error", "Guaflix");
-            }
-        }
-        public static List<Usuarios> usuariosLista2 = new List<Usuarios>();
 
-        public void obtener()
-        {
-            List<string> milistado2 = new List<string>();
-            milistado2 = UsersTree.miLIstado();
-            foreach (var model in milistado2)
+            usuariosLista2.Clear();
+            List<string> milistado = new List<string>();
+            milistado = UsersTree.miLIstado();
+
+
+            foreach (var model in milistado)
             {
                 var valores = model.Split('=');
-                var item = new Usuarios
+                var item = new Usuarios2
                 {
                     username = valores[0].Trim('%'),
                     nombre = valores[1].Trim('%'),
@@ -200,11 +155,51 @@ namespace Guaflix.Controllers
                 UsersTree.Cerrar();
                 pelis.peliculasTree2.Cerrar();
             }
+            foreach (var item in usuariosLista2)
+            {
+                
+                if (usuario == item.username && contraseña == item.password)
+                {
+                    UsersTree.Cerrar();
+                    pelis.cerrarArchivos();
+                    return RedirectToAction("CatalogoUsuario", "guaflix");
+                }
+            }
+                
+            
+            if (usuario == "admin" && contraseña == "admin")
+            {
+                UsersTree.Cerrar();
+                pelis.cerrarArchivos();
+                pelis.cerrarArchivos();
+                return RedirectToAction("Catálogo", "guaflix");
+            }
+            
+            else
+            {
+                UsersTree.Cerrar();
+                pelis.cerrarArchivos();
+                pelis.cerrarArchivos();
+                return RedirectToAction("Error", "Guaflix");
+            }
+          
+        }
+        
+
+        public void obtener()
+        {
+            
         }
         public ActionResult Error()
         {
             UsersTree.Cerrar();
-            pelis.peliculasTree2.Cerrar();
+            pelis.cerrarArchivos();
+            return View();
+        }
+
+        public ActionResult CatalogoUsuario()
+        {
+            pelis.cerrarArchivos();
             return View();
         }
     }

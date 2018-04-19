@@ -14,15 +14,15 @@ namespace Guaflix.Controllers
     public class PeliculasController : Controller
     {
         public static List<Peliculas2> Pelic = new List<Peliculas2>();
-        public ArbolB<Peliculas> seriesTree = new ArbolesB.ArbolB<Peliculas>(3, "name1.showtree", new FabricarTexto());
-        public ArbolB<Peliculas> seriesTree2 = new ArbolesB.ArbolB<Peliculas>(3, "year1.showtree", new FabricarTexto());
-        public ArbolB<Peliculas> seriesTree3 = new ArbolesB.ArbolB<Peliculas>(3, "gender1.showtree", new FabricarTexto());
-        public ArbolB<Peliculas> peliculasTree = new ArbolesB.ArbolB<Peliculas>(3, "name2.movietree", new FabricarTexto());
-        public ArbolB<Peliculas> peliculasTree2 = new ArbolesB.ArbolB<Peliculas>(3, "year2.movietree", new FabricarTexto());
-        public ArbolB<Peliculas> peliculasTree3 = new ArbolesB.ArbolB<Peliculas>(3, "gender2.movietree", new FabricarTexto());
-        public ArbolB<Peliculas> documentalTree = new ArbolesB.ArbolB<Peliculas>(3, "name3.documentarytree", new FabricarTexto());
-        public ArbolB<Peliculas> documental2 = new ArbolesB.ArbolB<Peliculas>(3, "year3.documentarytree", new FabricarTexto());
-        public ArbolB<Peliculas> documental3 = new ArbolesB.ArbolB<Peliculas>(3, "gender3.documentarytree", new FabricarTexto());
+        public ArbolB<Peliculas> seriesTree = new ArbolesB.ArbolB<Peliculas>(3, "name1series.showtree", new FabricarTexto());
+        public ArbolB<Peliculas> seriesTree2 = new ArbolesB.ArbolB<Peliculas>(3, "year1series.showtree", new FabricarTexto());
+        public ArbolB<Peliculas> seriesTree3 = new ArbolesB.ArbolB<Peliculas>(3, "gender1series.showtree", new FabricarTexto());
+        public ArbolB<Peliculas> peliculasTree = new ArbolesB.ArbolB<Peliculas>(3, "name2pelicula.movietree", new FabricarTexto());
+        public ArbolB<Peliculas> peliculasTree2 = new ArbolesB.ArbolB<Peliculas>(3, "year2pelicula.movietree", new FabricarTexto());
+        public ArbolB<Peliculas> peliculasTree3 = new ArbolesB.ArbolB<Peliculas>(3, "gender2pelicula.movietree", new FabricarTexto());
+        public ArbolB<Peliculas> documentalTree = new ArbolesB.ArbolB<Peliculas>(3, "name3documental.documentarytree", new FabricarTexto());
+        public ArbolB<Peliculas> documental2 = new ArbolesB.ArbolB<Peliculas>(3, "year3documental.documentarytree", new FabricarTexto());
+        public ArbolB<Peliculas> documental3 = new ArbolesB.ArbolB<Peliculas>(3, "gender3documental.documentarytree", new FabricarTexto());
         public ArbolB<Peliculas> Todo = new ArbolesB.ArbolB<Peliculas>(3, "Todo.tree", new FabricarTexto());
         // GET: Peliculas
         public void cerrarArchivos()
@@ -40,6 +40,7 @@ namespace Guaflix.Controllers
         }
         public ActionResult Index()
         {
+            cerrarArchivos();
             cerrarArchivos();
             return View();
         }
@@ -162,6 +163,7 @@ namespace Guaflix.Controllers
 
         public ActionResult ListadoPeliculas()
         {
+            Pelic.Clear();
             List<string> nuevos = new List<string>();
             Pelic.Clear();
             nuevos = Todo.miLIstado();
@@ -186,35 +188,56 @@ namespace Guaflix.Controllers
             peliculasTree2.Cerrar();
             return View();
         }
-        public static List<string> encontrado = new List<string>();
+        public static List<Peliculas2> encontrado = new List<Peliculas2>();
+
         public ActionResult Busqueda()
         {
             cerrarArchivos();
             return View();
         }
-        public static List<Peliculas> peliculaLista = new List<Peliculas>();
+
+      
         [HttpPost]
         public ActionResult Busqueda(string nombre, string añoLanzamiento, string genero)
         {
-            foreach (var model in peliculaLista)
+            encontrado.Clear();
+            foreach (var model in Pelic)
             {
-                if (nombre == model.Nombre)
+                if (nombre!=null)
                 {
-                    cerrarArchivos();
-                    encontrado.Add(model.Nombre);
+                    if (nombre == model.nombre)
+                    {
+                        cerrarArchivos();
+                        encontrado.Add(model);
+                    }
                 }
-                if (añoLanzamiento == model.AñoLanzamiento)
+
+                if (añoLanzamiento!=null)
                 {
-                    cerrarArchivos();
-                    encontrado.Add(model.AñoLanzamiento);
+                    if (añoLanzamiento == model.lanzamiento)
+                    {
+                        cerrarArchivos();
+                        encontrado.Add(model);
+                    }
                 }
-                if (genero == model.Genero)
+
+                if (genero != null)
                 {
-                    cerrarArchivos();
-                    encontrado.Add(model.Genero);
-                }
+                     if (genero == model.genero)
+                    {
+                        cerrarArchivos();
+                        encontrado.Add(model);
+                    }
+                } 
+                
+                
             }
             cerrarArchivos();
+            return View(encontrado);
+        }
+
+        public ActionResult listaEncontrados()
+        {
             return View();
         }
     }

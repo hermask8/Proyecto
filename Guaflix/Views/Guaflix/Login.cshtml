@@ -11,20 +11,11 @@
     {
     <div>
         <div class="form-horizontal">
-            <input type="text" name="usuario" />
-            <input type="password" name="contraseña" />
+           <label>Username</label> <input type="text" name="usuario" />
+            <label>Contraseña</label><input type="password" name="contraseña" />
             <input type="submit" value="Login" />
         </div>
-        <div>
-            @Html.ActionLink("Resgistrarse", "CrearUsuario", "Guaflix", new { area = "" }, new { @class = "navbar-brand" })
-        </div>
-        <div>
-            @Html.ActionLink("Cargar Usuarios", "CargarUsuarios", "Guaflix", new { area = "" }, new { @class = "navbar-brand" })
-        </div>
-
-        <div>
-            @Html.ActionLink("Ir a Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-        </div>
+       
 
 
     </div>

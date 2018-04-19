@@ -45,6 +45,7 @@ namespace Guaflix.Controllers
                 PeliculaLista.Add(modelo2);
             }
 
+            pelis.cerrarArchivos();
         }
 
         public ActionResult Index()

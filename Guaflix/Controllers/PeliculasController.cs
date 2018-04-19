@@ -13,6 +13,7 @@ namespace Guaflix.Controllers
 {
     public class PeliculasController : Controller
     {
+        public static List<Peliculas2> Pelic = new List<Peliculas2>();
         public ArbolB<Peliculas> seriesTree = new ArbolesB.ArbolB<Peliculas>(3, "name1.showtree", new FabricarTexto());
         public ArbolB<Peliculas> seriesTree2 = new ArbolesB.ArbolB<Peliculas>(3, "year1.showtree", new FabricarTexto());
         public ArbolB<Peliculas> seriesTree3 = new ArbolesB.ArbolB<Peliculas>(3, "gender1.showtree", new FabricarTexto());
@@ -22,6 +23,7 @@ namespace Guaflix.Controllers
         public ArbolB<Peliculas> documentalTree = new ArbolesB.ArbolB<Peliculas>(3, "name3.documentarytree", new FabricarTexto());
         public ArbolB<Peliculas> documental2 = new ArbolesB.ArbolB<Peliculas>(3, "year3.documentarytree", new FabricarTexto());
         public ArbolB<Peliculas> documental3 = new ArbolesB.ArbolB<Peliculas>(3, "gender3.documentarytree", new FabricarTexto());
+        public ArbolB<Peliculas> Todo = new ArbolesB.ArbolB<Peliculas>(3, "Todo.tree", new FabricarTexto());
         // GET: Peliculas
         public void cerrarArchivos()
         {
@@ -34,6 +36,7 @@ namespace Guaflix.Controllers
             seriesTree.Cerrar();
             seriesTree2.Cerrar();
             seriesTree3.Cerrar();
+            Todo.Cerrar();
         }
         public ActionResult Index()
         {
@@ -53,34 +56,44 @@ namespace Guaflix.Controllers
         [HttpPost]
        public ActionResult IngresoPeliculaManual(FormCollection pelicula)
         {
-                var modelo = new Peliculas
+                var modelo = new Peliculas2
                 {
-                    Tipo = pelicula["Tipo"].ToLower(),
-                    Nombre = pelicula["Nombre"],
-                    Genero = pelicula["Genero"],
-                    AñoLanzamiento =pelicula["AñoLanzamiento"]
+                    tipo = pelicula["Tipo"],
+                    nombre = pelicula["Nombre"],
+                    genero = pelicula["Genero"],
+                    lanzamiento =pelicula["AñoLanzamiento"]
                 };
-            if (modelo.Tipo=="documental")
+            var model2 = new Peliculas
             {
-                documentalTree.Agregar(modelo.Nombre,modelo);
-                documental2.Agregar((modelo.AñoLanzamiento + modelo.Nombre),modelo);
-                documental3.Agregar((modelo.Genero + modelo.Nombre),modelo);
+                Tipo = modelo.tipo,
+                AñoLanzamiento = modelo.lanzamiento,
+                Nombre = modelo.nombre,
+                Genero = modelo.genero
+            };
+            var compara = modelo.tipo.ToLower();
+            string Llave = model2.AñoLanzamiento + model2.Nombre;
+            string Llave2 = model2.Genero + model2.Nombre;
+            Todo.Agregar(Llave, model2);
+            if (compara == "documental")
+            {
+                documentalTree.Agregar(model2.Nombre, model2);
+                documental2.Agregar(Llave, model2);
+                documental3.Agregar(Llave2, model2);
             }
 
-            if (modelo.Tipo == "pelicula")
+            if (compara == "pelicula")
             {
-                peliculasTree.Agregar(modelo.Nombre, modelo);
-                peliculasTree2.Agregar((modelo.AñoLanzamiento + modelo.Nombre), modelo);
-                peliculasTree3.Agregar((modelo.AñoLanzamiento + modelo.Nombre), modelo);
+                peliculasTree.Agregar(model2.Nombre, model2);
+                peliculasTree2.Agregar(Llave, model2);
+                peliculasTree3.Agregar(Llave2, model2);
             }
 
-            if (modelo.Tipo == "series")
+            if (compara == "series")
             {
-                seriesTree.Agregar(modelo.Nombre, modelo);
-                seriesTree2.Agregar((modelo.AñoLanzamiento + modelo.Nombre), modelo);
-                seriesTree3.Agregar((modelo.AñoLanzamiento + modelo.Nombre), modelo);
+                seriesTree.Agregar(model2.Nombre, model2);
+                seriesTree2.Agregar(Llave, model2);
+                seriesTree3.Agregar(Llave2, model2);
             }
-
             cerrarArchivos();
             return View();
         }
@@ -117,6 +130,7 @@ namespace Guaflix.Controllers
 
                     string Llave = model2.AñoLanzamiento + model2.Nombre;
                     string Llave2 = model2.Genero + model2.Nombre;
+                    Todo.Agregar(Llave,model2);
                     if (compara == "documental")
                     {
                         documentalTree.Agregar(model2.Nombre, model2);
@@ -148,8 +162,23 @@ namespace Guaflix.Controllers
 
         public ActionResult ListadoPeliculas()
         {
-            peliculasTree2.Cerrar();
-            return View();
+            List<string> nuevos = new List<string>();
+            Pelic.Clear();
+            nuevos = Todo.miLIstado();
+            foreach (var item in nuevos)
+            {
+                var valores = item.Split('=');
+                var model = new Peliculas2
+                {
+                    tipo = valores[0].Trim('%'),
+                    nombre = valores[1].Trim('%'),
+                    lanzamiento = valores[2].Trim('%'),
+                    genero = valores[3].Trim('%')
+                };
+                Pelic.Add(model);
+            }
+            cerrarArchivos();
+            return View(Pelic);
         }
 
         public ActionResult EliminarPelicula()

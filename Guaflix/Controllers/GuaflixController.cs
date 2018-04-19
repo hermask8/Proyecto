@@ -22,10 +22,31 @@ namespace Guaflix.Controllers
     public class GuaflixController : Controller
     {
         PeliculasController pelis = new PeliculasController();
-        //public static List<Peliculas2> PeliculaLista = new List<Peliculas2>();
+        public static List<Usuarios2> PeliculaLista = new List<Usuarios2>();
         
         public ArbolB<Usuarios> UsersTree = new ArbolB<Usuarios>(3, "users.tree", new FabricarTextoUsuarios());
         // GET: Guaflix
+        public void Obtener()
+        {
+            List<string> miListado2 = new List<string>();
+            miListado2 = UsersTree.miLIstado();
+            foreach (var item in miListado2)
+            {
+                var valores = item.Split('=');
+                var modelo2 = new Usuarios2
+                {
+                    username = valores[0].Trim('%'),
+                    nombre = valores[1].Trim('%'),
+                    apellido = valores[2].Trim('%'),
+                    edad = valores[3].Trim('%'),
+                    password = valores[4].Trim('%'),
+                    confirmapassword = valores[5].Trim('%'),
+                };
+                PeliculaLista.Add(modelo2);
+            }
+
+        }
+
         public ActionResult Index()
         {
             UsersTree.Cerrar();

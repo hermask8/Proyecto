@@ -85,7 +85,7 @@ namespace ArbolesB
             _ultimaPosicionLibre++;
 
             // Datos a subir al padre luego de la separación  
-            string llavePorSubir = "%%%%%%%%%%%%%%%%%%%%";
+            string llavePorSubir = "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%";
             T datoPorSubir = _fabrica.FabricarNulo();
 
             // Se llama al método que hace la separación 
@@ -220,7 +220,7 @@ namespace ArbolesB
         #endregion
         public override void Agregar(string llave, T dato)
         {
-            if (llave == "%%%%%%%%%%%%%%%%%%%%")
+            if (llave == "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
             {
                 throw new ArgumentOutOfRangeException("llave");
             }
@@ -312,7 +312,7 @@ namespace ArbolesB
             {
                 RecorrerInOrdenRecursivo(nodoActual.Hijos[i], texto);
 
-                if ((i < nodoActual.Llaves.Count) && (nodoActual.Llaves[i] != "%%%%%%%%%%%%%%%%%%%%"))
+                if ((i < nodoActual.Llaves.Count) && (nodoActual.Llaves[i] != "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"))
                 {
                     miListado.Add(nodoActual.Datos[i].ToString());
                     texto.AppendLine(nodoActual.Llaves[i].ToString());

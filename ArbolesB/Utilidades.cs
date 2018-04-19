@@ -15,7 +15,7 @@ namespace ArbolesB
 
         // Para formatear los enteros en los archivos
         internal const int TextoEnteroTamaño = 11;
-        internal const int TextoEnteroLlave = 20;
+        internal const int TextoEnteroLlave = 40;
         private const string TextoEnteroFormato = "00000000000;-0000000000";
 
         // El salto de lina "enter"
@@ -32,7 +32,7 @@ namespace ArbolesB
         }
         internal static string FormatearLlave(string llave)
         {
-            return llave.PadLeft(20, '%');
+            return llave.PadLeft(40, '%');
         }
         #endregion
 

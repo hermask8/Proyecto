@@ -148,7 +148,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Peliculas.cs" />
+    <Compile Include="Models\Peliculas2.cs" />
     <Compile Include="Models\Usuarios.cs" />
+    <Compile Include="Models\Usuarios2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TamañoFijo\FabricarTexto.cs" />
     <Compile Include="TamañoFijo\FabricarTextoUsuarios.cs" />

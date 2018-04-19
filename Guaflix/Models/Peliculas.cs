@@ -10,7 +10,7 @@ namespace Guaflix.Models
     {
         
         
-        private const string TextoEnteroFormato = "%%%%%%%%%%%%%%%%%%%%=%%%%%%%%%%%%%%%%%%%%=%%%%%%%%%%%%%%%%%%%%=%%%%%%%%%%%%%%%%%%%%";
+        private const string TextoEnteroFormato = "%%%%%%%%%%%%%%%%%%%%=%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%=%%%%%%%%%%%%%%%%%%%%=%%%%%%%%%%%%%%%%%%%%";
         public string Nombre { get; set; }
         public string AñoLanzamiento { get; set; }
         public string Tipo { get; set; }
@@ -36,7 +36,7 @@ namespace Guaflix.Models
         {
             get
             {
-                return 83;
+                return 103;
             }
         }
 
@@ -46,9 +46,9 @@ namespace Guaflix.Models
 
             sb.Append(Tipo.PadLeft(20, '%'));
             sb.Append('=');
-            sb.Append(Nombre.PadLeft(20, '%'));
+            sb.Append(Nombre.PadLeft(40, '%'));
             sb.Append('=');
-            sb.Append(Convert.ToString(AñoLanzamiento).PadLeft(20, '='));
+            sb.Append(AñoLanzamiento.PadLeft(20, '%'));
             sb.Append('=');
             sb.Append(Genero.PadLeft(20, '%'));
 

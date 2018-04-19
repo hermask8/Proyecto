@@ -1,20 +1,56 @@
 {
-  {
-	"Nombre": "An Inconvenient Truth",
-	"AÃ±oLanzamiento": 2006,
-	"Tipo": "Documental",
-	"Genero": "Medio Ambiente"
-  },
-   {
-  "Nombre":"Avengers: Infinity War",
-	"AÃ±oLanzamiento": 2018,
-	"Tipo": "Pelicula",
-	"Genero": "Accion"
-  },
- {
-	"Nombre": "How I meet your Mother",
-	"AÃ±oLanzamiento": 2005,
-	"Tipo": "Show",
-  "Genero": "Sitcom"
-  }
+    {
+        "nombre": "An Inconvenient Truth",
+        "lanzamiento": "2013",
+        "tipo": "Documental",
+        "genero": "Medio Ambiente"
+    },
+    {
+        "nombre": "Avengers: Infinity War",
+        "lanzamiento": "2006",
+        "tipo": "Pelicula",
+        "genero": "Acción"
+    },
+    {
+        "nombre": "How I met your Mother",
+        "lanzamiento": "2009",
+        "tipo": "Series",
+        "genero": "Sitcom"
+    },
+    {
+        "nombre": "An Inconvenient Truth2",
+        "lanzamiento": "2013",
+        "tipo": "Documental",
+        "genero": "Medio Ambiente"
+    },
+    {
+        "nombre": "Avengers: Infinity War2",
+        "lanzamiento": "2006",
+        "tipo": "Pelicula",
+        "genero": "Acción"
+    },
+    {
+        "nombre": "How I met your Mother2",
+        "lanzamiento": "2009",
+        "tipo": "Series",
+        "genero": "Sitcom"
+    },
+    {
+        "nombre": "An Inconvenient Truth3",
+        "lanzamiento": "2013",
+        "tipo": "Documental",
+        "genero": "Medio Ambiente"
+    },
+    {
+        "nombre": "Avengers: Infinity War3",
+        "lanzamiento": "2006",
+        "tipo": "Pelicula",
+        "genero": "Acción"
+    },
+    {
+        "nombre": "How I met your Mother3",
+        "lanzamiento": "2009",
+        "tipo": "Series",
+        "genero": "Sitcom"
+    }
 }

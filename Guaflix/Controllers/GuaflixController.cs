@@ -49,22 +49,22 @@ namespace Guaflix.Controllers
 
         public ActionResult Index()
         {
+            pelis.cerrarArchivos();
             UsersTree.Cerrar();
-            pelis.peliculasTree2.Cerrar();
             return View();
         }
 
         public ActionResult ValidarUsuario()
         {
             UsersTree.Cerrar();
-            pelis.peliculasTree2.Cerrar();
+            pelis.cerrarArchivos();
             return View();
         }
 
         public ActionResult CargarUsuarios()
         {
             UsersTree.Cerrar();
-            pelis.peliculasTree2.Cerrar();
+            pelis.cerrarArchivos();
             return View();
         }
         [HttpPost]
@@ -82,20 +82,30 @@ namespace Guaflix.Controllers
                 for (int i = 1; i < g.Length; i+=1)
                 {
                     string a = "{" + g[i] + "}";
-                    var info = JsonConvert.DeserializeObject<Usuarios>(a);
-                    UsersTree.Agregar(info.nombre, info);
+                    var info = JsonConvert.DeserializeObject<Usuarios2>(a);
+                    var model = new Usuarios
+                    {
+                        username = info.username,
+                        nombre = info.nombre,
+                        apellido = info.apellido,
+                        edad = info.edad,
+                        password = info.password,
+                        confirmapassword = info.password
+                    };
+                    UsersTree.Agregar(info.nombre, model);
                     i++;
                 }
                 UsersTree.Cerrar();
-                pelis.peliculasTree2.Cerrar();
+                pelis.cerrarArchivos();
             }
             UsersTree.Cerrar();
+            pelis.cerrarArchivos();
             return View();
         }
         public ActionResult CrearUsuario()
         {
             UsersTree.Cerrar();
-            pelis.peliculasTree2.Cerrar();
+            pelis.cerrarArchivos();
             return View();
         }
         [HttpPost]
@@ -113,17 +123,18 @@ namespace Guaflix.Controllers
                     confirmapassword = persona["confirmpassword"]
                 };
                 
-                pelis.peliculasTree2.Cerrar();
+                
                 UsersTree.Agregar(model.nombre, model);
                 UsersTree.Cerrar();
+                pelis.cerrarArchivos();
             }
             catch
             {
                 UsersTree.Cerrar();
-                pelis.peliculasTree2.Cerrar();
+                pelis.cerrarArchivos();
             }
             UsersTree.Cerrar();
-            pelis.peliculasTree2.Cerrar();
+            pelis.cerrarArchivos();
             return View();
         }
         
@@ -131,13 +142,13 @@ namespace Guaflix.Controllers
         public ActionResult Catálogo()
         {
             UsersTree.Cerrar();
-            pelis.peliculasTree2.Cerrar();
+            pelis.cerrarArchivos();
             return View();
         }
         public ActionResult Login()
         {
             UsersTree.Cerrar();
-            pelis.peliculasTree2.Cerrar();
+            pelis.cerrarArchivos();
             return View();
         }
         [HttpPost]
@@ -147,14 +158,14 @@ namespace Guaflix.Controllers
             if (usuario == "admin" && contraseña == "admin")
             {
                 UsersTree.Cerrar();
-                pelis.peliculasTree2.Cerrar();
+                pelis.cerrarArchivos();
                 return RedirectToAction("Catálogo", "guaflix");
             }
             
             else
             {
                 UsersTree.Cerrar();
-                pelis.peliculasTree2.Cerrar();
+                pelis.cerrarArchivos();
                 return View();
             }
         }

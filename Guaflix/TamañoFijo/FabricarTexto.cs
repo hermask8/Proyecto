@@ -12,10 +12,10 @@ namespace Guaflix.TamañoFijo
         {
             Peliculas miPelicula  = new Peliculas();
             var datos = textoTamañoFijo.Split('=');
-            miPelicula.Tipo = datos[0].PadLeft(20, '%');
-            miPelicula.Nombre = datos[1].PadLeft(20, '%');
-            miPelicula.AñoLanzamiento = datos[2].PadLeft(20, '%');
-            miPelicula.Genero = datos[3].PadLeft(20, '%');
+            miPelicula.Tipo = datos[0].Trim();
+            miPelicula.Nombre = datos[1].Trim();
+            miPelicula.AñoLanzamiento = datos[2].Trim();
+            miPelicula.Genero = datos[3].Trim();
             return miPelicula;
         }
 

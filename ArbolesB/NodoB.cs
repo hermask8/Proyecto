@@ -32,7 +32,7 @@ namespace ArbolesB
             get
             {
                 int i = 0;
-                while (i < Llaves.Count && Llaves[i] != "%%%%%%%%%%%%%%%%%%%%")
+                while (i < Llaves.Count && Llaves[i] != "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
                 {
                     i++;
                 }
@@ -173,7 +173,7 @@ namespace ArbolesB
             Llaves = new List<string>();
             for (int i = 0; i < Orden - 1; i++)
             {
-                Llaves.Add("%%%%%%%%%%%%%%%%%%%%");
+                Llaves.Add("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             }
 
             Datos = new List<T>();
@@ -291,7 +291,7 @@ namespace ArbolesB
 
             for (int i = 0; i < Llaves.Count; i++)
             {
-                if ((Llaves[i].Trim('%').CompareTo(llave)) > 0 || (Llaves[i] == "%%%%%%%%%%%%%%%%%%%%"))
+                if ((Llaves[i].Trim('%').CompareTo(llave)) > 0 || (Llaves[i] == "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"))
                 {
                     posicion = i;
                     break;
@@ -333,7 +333,7 @@ namespace ArbolesB
                 throw new IndexOutOfRangeException("El nodo está lleno, ya no puede insertar más datos");
             }
 
-            if (llave == "%%%%%%%%%%%%%%%%%%%%")
+            if (llave == "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
             {
                 throw new ArgumentOutOfRangeException("llave");
             }
@@ -403,7 +403,7 @@ namespace ArbolesB
             }
 
             // Incrementar el tamaño de las listas en una posición       
-            Llaves.Add("%%%%%%%%%%%%%%%%%%%%");
+            Llaves.Add("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             Datos.Add(dato);
             Hijos.Add(Utilidades.ApuntadorVacio);
 
@@ -414,7 +414,7 @@ namespace ArbolesB
             int mitad = (Orden / 2);
             llavePorSubir = Llaves[mitad];
             datoPorSubir = Datos[mitad];
-            Llaves[mitad] = "%%%%%%%%%%%%%%%%%%%%";
+            Llaves[mitad] = "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%";
 
             // Llenar las llaves y datos que pasan al nuevo nodo       
             int j = 0;
@@ -422,7 +422,7 @@ namespace ArbolesB
             {
                 nuevoNodo.Llaves[j] = Llaves[i];
                 nuevoNodo.Datos[j] = Datos[i];
-                Llaves[i] = "%%%%%%%%%%%%%%%%%%%%";
+                Llaves[i] = "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%";
                 j++;
             }
 

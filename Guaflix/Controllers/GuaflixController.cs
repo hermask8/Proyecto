@@ -155,7 +155,15 @@ namespace Guaflix.Controllers
         [HttpPost]
         public ActionResult Login(string usuario, string contraseña)
         {
-            
+            foreach (var i in usuariosLista2)
+            {
+                if (usuario == i.username && contraseña == i.password)
+                {
+                    UsersTree.Cerrar();
+                    pelis.peliculasTree2.Cerrar();
+                    return RedirectToAction("Catálogo", "guaflix");
+                }
+            }
             if (usuario == "admin" && contraseña == "admin")
             {
                 UsersTree.Cerrar();
@@ -167,8 +175,37 @@ namespace Guaflix.Controllers
             {
                 UsersTree.Cerrar();
                 pelis.cerrarArchivos();
-                return View();
+                return RedirectToAction("Error", "Guaflix");
             }
+        }
+        public static List<Usuarios> usuariosLista2 = new List<Usuarios>();
+
+        public void obtener()
+        {
+            List<string> milistado2 = new List<string>();
+            milistado2 = UsersTree.miLIstado();
+            foreach (var model in milistado2)
+            {
+                var valores = model.Split('=');
+                var item = new Usuarios
+                {
+                    username = valores[0].Trim('%'),
+                    nombre = valores[1].Trim('%'),
+                    edad = valores[2].Trim('%'),
+                    apellido = valores[3].Trim('%'),
+                    password = valores[4].Trim('%'),
+                    confirmapassword = valores[5].Trim('%'),
+                };
+                usuariosLista2.Add(item);
+                UsersTree.Cerrar();
+                pelis.peliculasTree2.Cerrar();
+            }
+        }
+        public ActionResult Error()
+        {
+            UsersTree.Cerrar();
+            pelis.peliculasTree2.Cerrar();
+            return View();
         }
     }
 }

@@ -186,6 +186,36 @@ namespace Guaflix.Controllers
             peliculasTree2.Cerrar();
             return View();
         }
-        
+        public static List<string> encontrado = new List<string>();
+        public ActionResult Busqueda()
+        {
+            cerrarArchivos();
+            return View();
+        }
+        public static List<Peliculas> peliculaLista = new List<Peliculas>();
+        [HttpPost]
+        public ActionResult Busqueda(string nombre, string añoLanzamiento, string genero)
+        {
+            foreach (var model in peliculaLista)
+            {
+                if (nombre == model.Nombre)
+                {
+                    cerrarArchivos();
+                    encontrado.Add(model.Nombre);
+                }
+                if (añoLanzamiento == model.AñoLanzamiento)
+                {
+                    cerrarArchivos();
+                    encontrado.Add(model.AñoLanzamiento);
+                }
+                if (genero == model.Genero)
+                {
+                    cerrarArchivos();
+                    encontrado.Add(model.Genero);
+                }
+            }
+            cerrarArchivos();
+            return View();
+        }
     }
 }

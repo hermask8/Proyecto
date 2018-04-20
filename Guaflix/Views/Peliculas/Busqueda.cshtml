@@ -5,3 +5,24 @@
 
 <h2>Busqueda</h2>
 
+@using (Html.BeginForm("Busqueda", "Peliculas", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div>
+        <div class="form-horizontal">
+            <label>Nombre</label><input type="text" name="nombre" />
+            <input type="submit" value="Buscar" />
+            <label>Año de Lanzamiento</label><input type="text" name="añoLanzamiento" />
+            <input type="submit" value="Buscar" />
+            <label>Genero</label><input type="text" name="genero" />
+            <input type="submit" value="Buscar" />
+        </div>
+        <div>
+            @Html.ActionLink("Ir a Catálogo", "Catálogo", "Guaflix", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+
+
+
+
+
+    </div>
+}

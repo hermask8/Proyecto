@@ -1,4 +1,12 @@
-﻿
+﻿<head>
+    <title>Color de Fondo de la página</title>
+    <style type="text/css">
+        body {
+            background: black;
+        }
+    </style>
+</head>
+<font size=40 color="white"> Guaflix</font>
 @{
     ViewBag.Title = "Login";
 }
@@ -9,15 +17,15 @@
 
     @using (Html.BeginForm("Login", "Guaflix", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-    <div>
-        <div class="form-horizontal">
-           <label>Username</label> <input type="text" name="usuario" />
-            <label>Contraseña</label><input type="password" name="contraseña" />
-            <input type="submit" value="Login" />
+        <div>
+            <div class="form-horizontal">
+                <label>Username</label> <input type="text" name="usuario" />
+                <label>Contraseña</label><input type="password" name="contraseña" />
+                <input type="submit" value="Login" />
+            </div>
+
+
+
         </div>
-       
-
-
-    </div>
     }
 </body>

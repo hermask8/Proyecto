@@ -1,15 +1,23 @@
 ﻿@model Guaflix.Models.Usuarios
-
+<head>
+    <title>Color de Fondo de la página</title>
+    <style type="text/css">
+        body {
+            background: black;
+        }
+    </style>
+</head>
+<font size=40 color="white"> Guaflix</font>
 @{
     ViewBag.Title = "CrearUsuario";
 }
 
 <h2>CrearUsuario</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Usuarios</h4>
         <hr />
@@ -70,7 +78,7 @@
     </div>
 }
 
-    <div>
-        @Html.ActionLink("Regresar a menu principal", "Catálogo", "Guaflix")
-        @Html.ActionLink("Iniciar sesion de nuevo", "Login", "Guaflix")
-    </div>
+<div>
+    @Html.ActionLink("Regresar a menu principal", "Catálogo", "Guaflix")
+    @Html.ActionLink("Iniciar sesion de nuevo", "Login", "Guaflix")
+</div>

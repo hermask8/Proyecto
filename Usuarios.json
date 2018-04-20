@@ -13,4 +13,18 @@
         "username": "mlopez",
         "password": "mlopez987"
     }
+    {
+        "nombre": "Alex",
+        "apellido": "Sanchez",
+        "edad": 20,
+        "username": "alexito",
+        "password": "jperez123"
+    },
+    {
+        "nombre": "Mario",
+        "apellido": "Lopez",
+        "edad": 19,
+        "username": "mariito",
+        "password": "mario3"
+    }
 ]

@@ -21,14 +21,19 @@ namespace Guaflix.Controllers
 {
     public class GuaflixController : Controller
     {
-        PeliculasController pelis = new PeliculasController();
+        
+        public static string user = null;
         public static List<Usuarios2> usuariosLista2 = new List<Usuarios2>();
         public ArbolB<Usuarios> UsersTree = new ArbolB<Usuarios>(3, "users.tree", new FabricarTextoUsuarios());
         // GET: Guaflix
-
+        public string retorno()
+        {
+           // pelis.cerrarArchivos();
+            return user;
+        }
         public ActionResult Index()
         {
-            pelis.cerrarArchivos();
+          //  pelis.cerrarArchivos();
             UsersTree.Cerrar();
             return View();
         }
@@ -36,55 +41,64 @@ namespace Guaflix.Controllers
         public ActionResult ValidarUsuario()
         {
             UsersTree.Cerrar();
-            pelis.cerrarArchivos();
+          //  pelis.cerrarArchivos();
             return View();
         }
 
         public ActionResult CargarUsuarios()
         {
             UsersTree.Cerrar();
-            pelis.cerrarArchivos();
+            //pelis.cerrarArchivos();
             return View();
         }
         [HttpPost]
         public ActionResult CargarUsuarios(HttpPostedFileBase archivo)
         {
-            string pathArchivo = string.Empty;
-            if (archivo != null)
+            try
             {
-                archivo.SaveAs(Server.MapPath("~/JSONFiles" + Path.GetFileName(archivo.FileName)));
-                StreamReader sr = new StreamReader(Server.MapPath("~/JSONFiles" + Path.GetFileName(archivo.FileName)));
-                var informacion = sr.ReadToEnd();
-                string[] g;
-                char[] separador = { '{', '}' };
-                g = informacion.Split(separador, StringSplitOptions.RemoveEmptyEntries);
-                for (int i = 1; i < g.Length; i+=1)
+                string pathArchivo = string.Empty;
+                if (archivo != null)
                 {
-                    string a = "{" + g[i] + "}";
-                    var info = JsonConvert.DeserializeObject<Usuarios2>(a);
-                    var model = new Usuarios
+                    archivo.SaveAs(Server.MapPath("~/JSONFiles" + Path.GetFileName(archivo.FileName)));
+                    StreamReader sr = new StreamReader(Server.MapPath("~/JSONFiles" + Path.GetFileName(archivo.FileName)));
+                    var informacion = sr.ReadToEnd();
+                    string[] g;
+                    char[] separador = { '{', '}' };
+                    g = informacion.Split(separador, StringSplitOptions.RemoveEmptyEntries);
+                    for (int i = 1; i < g.Length; i += 1)
                     {
-                        username = info.username,
-                        nombre = info.nombre,
-                        apellido = info.apellido,
-                        edad = info.edad,
-                        password = info.password,
-                        confirmapassword = info.password
-                    };
-                    UsersTree.Agregar(info.nombre, model);
-                    i++;
+                        string a = "{" + g[i] + "}";
+                        var info = JsonConvert.DeserializeObject<Usuarios2>(a);
+                        var model = new Usuarios
+                        {
+                            username = info.username,
+                            nombre = info.nombre,
+                            apellido = info.apellido,
+                            edad = info.edad,
+                            password = info.password,
+                            confirmapassword = info.password
+                        };
+                        UsersTree.Agregar(info.nombre, model);
+                        i++;
+                    }
+                    UsersTree.Cerrar();
+                    // pelis.cerrarArchivos();
                 }
                 UsersTree.Cerrar();
-                pelis.cerrarArchivos();
+                // pelis.cerrarArchivos();
+                return View();
             }
-            UsersTree.Cerrar();
-            pelis.cerrarArchivos();
-            return View();
+            catch (Exception)
+            {
+                UsersTree.Cerrar();
+                return View();
+            }
+            
         }
         public ActionResult CrearUsuario()
         {
             UsersTree.Cerrar();
-            pelis.cerrarArchivos();
+          //  pelis.cerrarArchivos();
             return View();
         }
         [HttpPost]
@@ -105,15 +119,15 @@ namespace Guaflix.Controllers
                 
                 UsersTree.Agregar(model.username, model);
                 UsersTree.Cerrar();
-                pelis.cerrarArchivos();
+               // pelis.cerrarArchivos();
             }
             catch
             {
                 UsersTree.Cerrar();
-                pelis.cerrarArchivos();
+               // pelis.cerrarArchivos();
             }
             UsersTree.Cerrar();
-            pelis.cerrarArchivos();
+            //pelis.cerrarArchivos();
             return View();
         }
         
@@ -121,85 +135,94 @@ namespace Guaflix.Controllers
         public ActionResult Catálogo()
         {
             UsersTree.Cerrar();
-            pelis.cerrarArchivos();
+            //pelis.cerrarArchivos();
             return View();
         }
         public ActionResult Login()
         {
             UsersTree.Cerrar();
-            pelis.cerrarArchivos();
+            //pelis.cerrarArchivos();
             return View();
         }
         [HttpPost]
         public ActionResult Login(string usuario, string contraseña)
         {
-
-            usuariosLista2.Clear();
-            List<string> milistado = new List<string>();
-            milistado = UsersTree.miLIstado();
-
-
-            foreach (var model in milistado)
+            try
             {
-                var valores = model.Split('=');
-                var item = new Usuarios2
+                user = usuario;
+                usuariosLista2.Clear();
+                List<string> milistado = new List<string>();
+                milistado = UsersTree.miLIstado();
+
+
+                foreach (var model in milistado)
                 {
-                    username = valores[0].Trim('%'),
-                    nombre = valores[1].Trim('%'),
-                    edad = valores[2].Trim('%'),
-                    apellido = valores[3].Trim('%'),
-                    password = valores[4].Trim('%'),
-                    confirmapassword = valores[5].Trim('%'),
-                };
-                usuariosLista2.Add(item);
-                UsersTree.Cerrar();
-                pelis.peliculasTree2.Cerrar();
-            }
-            foreach (var item in usuariosLista2)
-            {
-                
-                if (usuario == item.username && contraseña == item.password)
+                    var valores = model.Split('=');
+                    var item = new Usuarios2
+                    {
+                        username = valores[0].Trim('%'),
+                        nombre = valores[1].Trim('%'),
+                        edad = valores[2].Trim('%'),
+                        apellido = valores[3].Trim('%'),
+                        password = valores[4].Trim('%'),
+                        confirmapassword = valores[5].Trim('%'),
+                    };
+                    usuariosLista2.Add(item);
+                    UsersTree.Cerrar();
+                    // pelis.cerrarArchivos();
+                }
+                foreach (var item in usuariosLista2)
+                {
+
+                    if (usuario == item.username && contraseña == item.password)
+                    {
+                        UsersTree.Cerrar();
+                        // pelis.cerrarArchivos();
+                        return RedirectToAction("CatalogoUsuario", "guaflix");
+                    }
+                }
+
+
+                if (usuario == "admin" && contraseña == "admin")
                 {
                     UsersTree.Cerrar();
-                    pelis.cerrarArchivos();
-                    return RedirectToAction("CatalogoUsuario", "guaflix");
+                    //pelis.cerrarArchivos();
+                    return RedirectToAction("Catálogo", "guaflix");
+                }
+
+                else
+                {
+                    UsersTree.Cerrar();
+                    // pelis.cerrarArchivos();
+                    //pelis.cerrarArchivos();
+                    return RedirectToAction("Error", "Guaflix");
                 }
             }
-                
-            
-            if (usuario == "admin" && contraseña == "admin")
+            catch (Exception)
             {
                 UsersTree.Cerrar();
-                pelis.cerrarArchivos();
-                pelis.cerrarArchivos();
-                return RedirectToAction("Catálogo", "guaflix");
+                return View();
             }
             
-            else
-            {
-                UsersTree.Cerrar();
-                pelis.cerrarArchivos();
-                pelis.cerrarArchivos();
-                return RedirectToAction("Error", "Guaflix");
-            }
-          
+          //  pelis.cerrarArchivos();
         }
         
 
         public void obtener()
         {
-            
+           // pelis.cerrarArchivos();
         }
         public ActionResult Error()
         {
             UsersTree.Cerrar();
-            pelis.cerrarArchivos();
+           // pelis.cerrarArchivos();
             return View();
         }
 
         public ActionResult CatalogoUsuario()
         {
-            pelis.cerrarArchivos();
+            //  pelis.cerrarArchivos();
+            UsersTree.Cerrar();
             return View();
         }
     }

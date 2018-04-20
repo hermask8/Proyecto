@@ -1,0 +1,56 @@
+﻿@model Guaflix.Models.Peliculas2
+
+@{
+    ViewBag.Title = "AgregarWatch";
+}
+
+<h2>AgregarWatch</h2>
+
+<h3>se agrego la pelicula correctamente</h3>
+<div>
+    <h4>Peliculas2</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lanzamiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lanzamiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.genero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.genero)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+           
+            @Html.ActionLink("Regresar al listado", "ListadoPeliculas","Peliculas")
+        </div>
+    }
+</div>

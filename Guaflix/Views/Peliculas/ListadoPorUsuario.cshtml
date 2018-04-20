@@ -1,14 +1,13 @@
 ﻿@model IEnumerable<Guaflix.Models.Peliculas2>
 
 @{
-    ViewBag.Title = "ListadoPeliculas";
+    ViewBag.Title = "ListadoPorUsuario";
 }
 
-<h2>ListadoPeliculas</h2>
+<h2>ListadoPorUsuario</h2>
 
 <p>
-    @Html.ActionLink("Buscar", "Busqueda", "Peliculas")
-    @Html.ActionLink("Regresar al menu principal", "Catálogo", "Guaflix")
+    @Html.ActionLink("Regresar a la vista principal", "Catálogo","Guaflix")
 </p>
 <table class="table">
     <tr>
@@ -41,8 +40,8 @@
         <td>
             @Html.DisplayFor(modelItem => item.genero)
         </td>
-        <td>|
-            @Html.ActionLink("Agregar", "AgregarWatch","Peliculas",new { id = item.nombre },null)
+        <td>
+          
         </td>
     </tr>
 }
